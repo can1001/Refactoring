@@ -39,10 +39,10 @@ public class Customer {
             }
 
             // 이번에 대여하는 비디오 정보와 대여료를 출력
-            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(thisAmount) + "\n";
+            result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
 
             // 현재까지 누적된 총 대여료
-            totalAmount += thisAmount;
+            totalAmount += each.getCharge();
         }
 
         // 푸터 행 추가
@@ -50,5 +50,5 @@ public class Customer {
         result += "적립 포인트: " + String.valueOf(frequentRenterPoints);
         return result;
     }
-        
+
 }

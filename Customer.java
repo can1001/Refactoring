@@ -38,8 +38,28 @@ public class Customer {
         }
 
         // 푸터 행 추가
-        result += "누적 대여료: " + String.valueOf(totalAmount) + "\n";
-        result += "적립 포인트: " + String.valueOf(frequentRenterPoints);
+        result += "누적 대여료: " + String.valueOf(getTotalCharge()) + "\n";
+        result += "적립 포인트: " + String.valueOf(getTotalFrequentRenterPoints());
+        return result;
+    }
+
+    private int getTotalFrequentRenterPoints() {
+        int result = 0;
+        Enumeration rentals = _rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+            result += each.getFrequentRenterPoints();
+        }
+        return result;
+    }
+
+    private double getTotalCharge() {
+        double result = 0;
+        Enumeration rentals = _rentals.elements();
+        while (rentals.hasMoreElements()) {
+            Rental each = (Rental) rentals.nextElement();
+            result += each.getCharge();
+        }
         return result;
     }
 

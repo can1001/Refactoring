@@ -3,6 +3,8 @@ public class Movie {
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
     private String _title;
+
+    Price _price;
     
     public Movie(String title, int priceCode) {
         _title = title;
@@ -21,7 +23,7 @@ public class Movie {
                 _price = new NewReleasePrice();
                 break;
             default:
-                break;
+                throw new IllegalArgumentException("가격 코드가 잘못됐습니다.");
         }
     }
 
@@ -33,28 +35,8 @@ public class Movie {
         return _title;
     }
 
-    private Price _price;
-
     public double getCharge(int daysRented)  {
-        double result = 0;
-        switch (getPriceCode()) {
-            case Movie.REGULAR:
-                result +=2;
-                if (daysRented > 2) {
-                    result += (daysRented - 2) * 1.5;
-                }
-                break;
-            case Movie.NEW_RELEASE:
-                result += daysRented * 3;
-                break;
-            case Movie.CHILDRENS:
-                result += 1.5;
-                if (daysRented > 3) {
-                    result += (daysRented -3) * 1.5;
-                }
-                break;
-        }
-        return result;
+        return _price.getCharge(daysRented);
     }
 
     public int getFrequentRenterPoints(int daysRented) {
@@ -63,10 +45,6 @@ public class Movie {
         } else {
             return 1;
         }
-    }
-
-    abstract class Price {
-        abstract int getPriceCode();
     }
 
     class ChildrensPrice extends Price {

@@ -27,10 +27,6 @@ public class Movie {
         }
     }
 
-    public int getPriceCode() {
-        return _price.getPriceCode();
-    }
-
     public String getTitle() {
         return _title;
     }
@@ -40,32 +36,7 @@ public class Movie {
     }
 
     public int getFrequentRenterPoints(int daysRented) {
-        if ((getPriceCode() == Movie.NEW_RELEASE) && daysRented > 1) {
-            return 2;
-        } else {
-            return 1;
-        }
-    }
-
-    class ChildrensPrice extends Price {
-        @Override
-        int getPriceCode() {
-            return Movie.CHILDRENS;
-        }
-    }
-
-    class NewReleasePrice extends Price {
-        @Override
-        int getPriceCode() {
-            return Movie.NEW_RELEASE;
-        }
-    }
-
-    class RegularPrice extends Price {
-        @Override
-        int getPriceCode() {
-            return Movie.REGULAR;
-        }
+        return _price.getFrequentRenterPoints(daysRented);
     }
 
 }
